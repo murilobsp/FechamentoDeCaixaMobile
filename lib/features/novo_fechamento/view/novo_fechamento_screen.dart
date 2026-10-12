@@ -1,0 +1,362 @@
+import 'package:fechamento_caixa/features/novo_fechamento/model/novo_fechamento_model.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:fechamento_caixa/features/novo_fechamento/viewmodel/novo_fechamento_viewmodel.dart';
+
+//CONTROLLER PARA PEGAR VALOR DAS TEXTFIELD
+final dinheiroController = TextEditingController();
+final creditoController = TextEditingController();
+final debitoController = TextEditingController();
+final pixController = TextEditingController();
+
+final formatoDinheiro = NumberFormat.currency(locale: "pt_BR", symbol: "R\$");
+
+//CRIA OBJETO PARA PEGAR OS DADOS
+NovoFechamentoModel? fechamento;
+
+//CRIA OBJETO DA VM PARA MANDAR OS DADOS DELA
+final viewModel = NovoFechamentoViewmodel();
+
+//GET PARA RECEBER OS VALORES DO MODEL
+//E EXIBIR EM TEMPO REAL
+double get total {
+  final dinheiro = double.tryParse(dinheiroController.text) ?? 0;
+  final credito = double.tryParse(creditoController.text) ?? 0;
+  final debito = double.tryParse(debitoController.text) ?? 0;
+  final pix = double.tryParse(pixController.text) ?? 0;
+
+  return dinheiro + credito + debito + pix;
+}
+
+class NovoFechamentoScreen extends StatefulWidget {
+  const NovoFechamentoScreen({super.key});
+
+  @override
+  State<NovoFechamentoScreen> createState() => _NovoFechamentoScreenState();
+}
+
+class _NovoFechamentoScreenState extends State<NovoFechamentoScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(250, 255, 255, 255),
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 0, 18, 213),
+        iconTheme: IconThemeData(color: Colors.white),
+        title: Text(
+          "Novo Fechamento",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
+        ),
+      ),
+
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.all(10),
+                width: double.infinity,
+
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 10,
+                      offset: Offset(0, 1),
+                    ),
+                  ],
+                ),
+
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      height: 50,
+                      child: Text(
+                        "Valores do Caixa",
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                        children: [
+                          Row(
+                            children: [
+                              Icon(Icons.money, size: 40, color: Colors.green),
+                              SizedBox(width: 20),
+                              Text("Dinheiro em espécie"),
+                            ],
+                          ),
+
+                          SizedBox(
+                            width: 130,
+                            height: 50,
+                            child: TextField(
+                              keyboardType: TextInputType.numberWithOptions(
+                                decimal: true,
+                              ),
+                              controller: dinheiroController,
+                              onChanged: (valor) {
+                                setState(() {});
+                              },
+                              decoration: InputDecoration(
+                                hintText: 'R\$',
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.credit_card,
+                                size: 40,
+                                color: const Color.fromARGB(255, 0, 18, 213),
+                              ),
+                              SizedBox(width: 20),
+                              Text("Crédito"),
+                            ],
+                          ),
+
+                          SizedBox(
+                            width: 130,
+                            height: 50,
+                            child: TextField(
+                              keyboardType: TextInputType.numberWithOptions(
+                                decimal: true,
+                              ),
+                              controller: creditoController,
+                              onChanged: (valor) {
+                                setState(() {});
+                              },
+                              decoration: InputDecoration(
+                                hintText: 'R\$',
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.credit_card_sharp,
+                                size: 40,
+                                color: const Color.fromARGB(255, 0, 18, 213),
+                              ),
+                              SizedBox(width: 20),
+                              Text("Débito"),
+                            ],
+                          ),
+
+                          SizedBox(
+                            width: 130,
+                            height: 50,
+                            child: TextField(
+                              keyboardType: TextInputType.numberWithOptions(
+                                decimal: true,
+                              ),
+                              controller: debitoController,
+
+                              onChanged: (valor) {
+                                setState(() {});
+                              },
+                              decoration: InputDecoration(
+                                hintText: 'R\$',
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(Icons.pix, size: 40, color: Colors.grey),
+                              SizedBox(width: 20),
+                              Text("Pix"),
+                            ],
+                          ),
+
+                          SizedBox(
+                            width: 130,
+                            height: 50,
+                            child: TextField(
+                              keyboardType: TextInputType.numberWithOptions(
+                                decimal: true,
+                              ),
+                              controller: pixController,
+                              onChanged: (valor) {
+                                setState(() {});
+                              },
+                              decoration: InputDecoration(
+                                hintText: 'R\$',
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Padding(
+                      padding: EdgeInsetsGeometry.symmetric(vertical: 5),
+
+                      child: Column(
+                        children: [
+                          SizedBox(height: 5),
+                          Container(
+                            width: double.infinity,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color.fromARGB(116, 158, 158, 158),
+                            ),
+
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Total de vendas:",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+
+                                Text(
+                                  formatoDinheiro.format(total),
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                children: [
+                  SizedBox(height: 10),
+
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      "Observações (opcional)",
+                      style: TextStyle(fontSize: 17),
+                    ),
+                  ),
+
+                  SizedBox(
+                    width: double.infinity,
+
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: TextField(
+                        maxLines: 4,
+                        decoration: InputDecoration(
+                          hintText: "Ex: Troco de R\$ 50,00, sem pendências",
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                              width: 1,
+                            ),
+                          ),
+
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.deepPurple,
+                              width: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              SafeArea(
+                child: Padding(
+                  padding: EdgeInsetsGeometry.symmetric(vertical: 30),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        fechamento = NovoFechamentoModel(
+                          dinheiro:
+                              double.tryParse(dinheiroController.text) ?? 0,
+                          credito: double.tryParse(creditoController.text) ?? 0,
+                          debito: double.tryParse(debitoController.text) ?? 0,
+                          pix: double.tryParse(pixController.text) ?? 0,
+                        );
+                        await viewModel.salvarFechamento(fechamento!);
+
+                        if (!context.mounted) return;
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          '/',
+                          (route) => false,
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 0, 18, 213),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadiusGeometry.circular(10),
+                        ),
+                      ),
+                      child: Text("Finalizar Fechamento"),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
