@@ -64,7 +64,7 @@ class _NovoFechamentoScreenState extends State<NovoFechamentoScreen> {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black12,
-                      blurRadius: 10,
+                      blurRadius: 2,
                       offset: Offset(0, 1),
                     ),
                   ],
