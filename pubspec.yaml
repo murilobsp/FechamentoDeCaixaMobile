@@ -28,6 +28,7 @@ dev_dependencies:
 
 flutter:
   assets:
+      #IMAGENS HOME SCREEN
     - assets/home_screen/novo_fechamento.png
     - assets/home_screen/historico_relatorios.png
     - assets/home_screen/relatorios.png
@@ -37,7 +38,18 @@ flutter:
     - assets/home_screen/relatorio.png
     - assets/home_screen/mais.png
     
+
+      #IMAGENS NOVO FECHAMENTO
     - assets/novo_fechamento/seta-para-esquerda.png
+
+
+    #IMAGENS RELATORIO DO CAIXA
+
+    - assets/relatorio_caixa/dinheiro.png
+    - assets/relatorio_caixa/cartaocredito.png
+    - assets/relatorio_caixa/cartaodebito.png
+    - assets/relatorio_caixa/entrada.png
+    - assets/relatorio_caixa/saida.png
 
 
 
