@@ -8,6 +8,7 @@ final dinheiroController = TextEditingController();
 final creditoController = TextEditingController();
 final debitoController = TextEditingController();
 final pixController = TextEditingController();
+final observacoesController = TextEditingController();
 
 final formatoDinheiro = NumberFormat.currency(locale: "pt_BR", symbol: "R\$");
 
@@ -294,6 +295,7 @@ class _NovoFechamentoScreenState extends State<NovoFechamentoScreen> {
                     child: SizedBox(
                       width: double.infinity,
                       child: TextField(
+                        controller: observacoesController,
                         maxLines: 4,
                         decoration: InputDecoration(
                           hintText: "Ex: Troco de R\$ 50,00, sem pendências",
@@ -331,6 +333,7 @@ class _NovoFechamentoScreenState extends State<NovoFechamentoScreen> {
                           credito: double.tryParse(creditoController.text) ?? 0,
                           debito: double.tryParse(debitoController.text) ?? 0,
                           pix: double.tryParse(pixController.text) ?? 0,
+                          obs: observacoesController.text,
                         );
                         await viewModel.salvarFechamento(fechamento!);
 

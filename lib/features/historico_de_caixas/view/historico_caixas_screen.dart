@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fechamento_caixa/features/historico_de_caixas/viewmodel/historico_de_caixa_viewmodels.dart';
 import 'package:flutter/material.dart';
 import 'package:fechamento_caixa/features/novo_fechamento/view/novo_fechamento_screen.dart';
 import 'package:intl/intl.dart';
@@ -7,18 +8,8 @@ bool selectTodos = false;
 bool selectFechados = false;
 bool selectMes = false;
 
-Future<List<Map<String, dynamic>>> buscarFechamentos() async {
-  final resultado = await FirebaseFirestore.instance
-      .collection("fechamentos")
-      .orderBy("Date", descending: true)
-      .get();
-
-  List<Map<String, dynamic>> dados = resultado.docs.map((documento) {
-    
-    return documento.data();
-  }).toList();
-  return dados;
-}
+//REFERENCIO O VIEWMODELS PARA USAR A FUNCAO
+final HistoricoDeCaixaViewmodels viewmodels = HistoricoDeCaixaViewmodels();
 
 class HistoricoCaixasScreen extends StatefulWidget {
   const HistoricoCaixasScreen({super.key});
@@ -66,7 +57,7 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
                 ),
               ),
               SizedBox(height: 5),
-        
+
               SizedBox(
                 width: double.infinity,
                 child: Row(
@@ -90,9 +81,9 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
                       ),
                       child: Text("Todos"),
                     ),
-        
+
                     SizedBox(width: 10),
-        
+
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
@@ -111,9 +102,9 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
                       ),
                       child: Text("Fechados"),
                     ),
-        
+
                     SizedBox(width: 10),
-        
+
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
@@ -135,33 +126,39 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
                   ],
                 ),
               ),
-        
+
               SizedBox(height: 10),
-        
+
               if (selectTodos == true)
                 Expanded(
                   child: FutureBuilder<List<Map<String, dynamic>>>(
-                    future: buscarFechamentos(),
+                    future: viewmodels.buscarFechamentos(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData || snapshot.data!.isEmpty) {
                         return const Text("Nenhum dado encontrado!");
                       }
-        
+
                       final fechamentos = snapshot.data!;
-        
+
                       return ListView.builder(
                         itemCount: fechamentos.length,
                         itemBuilder: (context, index) {
                           final dados = fechamentos[index];
-        
+
                           return Padding(
                             padding: EdgeInsetsGeometry.symmetric(vertical: 3),
                             child: SizedBox(
                               width: double.infinity,
                               height: 80,
-        
+
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    "/relatorio_caixa",
+                                    arguments: dados,
+                                  );
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   foregroundColor: Colors.black,
@@ -177,9 +174,11 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
                                       padding: EdgeInsetsGeometry.symmetric(
                                         horizontal: 10,
                                       ),
-                                      child: Icon(Icons.calendar_month_outlined),
+                                      child: Icon(
+                                        Icons.calendar_month_outlined,
+                                      ),
                                     ),
-        
+
                                     Expanded(
                                       child: Padding(
                                         padding: EdgeInsetsGeometry.symmetric(
@@ -188,22 +187,33 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
-        
+
                                           children: [
                                             Column(
                                               children: [
                                                 Text(
-                                                  DateFormat('dd/MM/yyyy').format((dados['Date'] as Timestamp).toDate()),
+                                                  DateFormat(
+                                                    'dd/MM/yyyy',
+                                                  ).format(
+                                                    (dados['Date'] as Timestamp)
+                                                        .toDate(),
+                                                  ),
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
-                                                Text(DateFormat('HH:mm:ss').format((dados['Date'] as Timestamp).toDate().toLocal(),)),
+                                                Text(
+                                                  DateFormat('HH:mm:ss').format(
+                                                    (dados['Date'] as Timestamp)
+                                                        .toDate()
+                                                        .toLocal(),
+                                                  ),
+                                                ),
                                               ],
                                             ),
-        
+
                                             SizedBox(width: 10),
-        
+
                                             Column(
                                               children: [
                                                 Text(

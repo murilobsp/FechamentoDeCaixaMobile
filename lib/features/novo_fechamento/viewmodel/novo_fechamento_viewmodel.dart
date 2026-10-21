@@ -14,6 +14,7 @@ class NovoFechamentoViewmodel {
       "debito": fechamento.debito,
       "pix": fechamento.pix,
       "total": fechamento.total,
+      "obs" : fechamento.obs,
     });
   }
 }
