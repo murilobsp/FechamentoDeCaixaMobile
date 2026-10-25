@@ -68,7 +68,8 @@ A arquitetura é dividida em três camadas principais:
 
 ### Resumo do fechamento
 
-🚧Ainda em construção.
+<img width="200" alt="Screenshot_1792552217" src="https://github.com/user-attachments/assets/5c5b332e-60d6-4c77-b77f-0a9478e77089" />
+
 
 ### Usuários cadastrados
 
@@ -109,11 +110,23 @@ fechamento_caixa/
 │   │       └── novo_fechamento_viewmodel.dart
 │   │
 │   └── historico_caixas/
+│   │   ├── models/
+│   │   │   └── historico_caixas_model.dart
+│   │   ├── views/
+│   │   │   └── historico_caixas_screen.dart
+│   │   └── viewmodels/
+│   │      └── historico_caixas_viewmodel.dart
+│   │
+│   └── relatorio_de_caixa/
 │       ├── models/
+│       │   └── relatorio_de_caixa_model.dart
 │       ├── views/
-│       │   └── historico_caixas_screen.dart
+│       │   └── relatorio_caixa_screen.dart
 │       └── viewmodels/
-│          └── historico_caixas_viewmodel.dart
+│           └── relatorio_caixa_viewmodels.dart
+│
+│
+│
 │
 ├── app.dart
 ├── main.dart
