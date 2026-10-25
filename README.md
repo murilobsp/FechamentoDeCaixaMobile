@@ -54,21 +54,26 @@ A arquitetura é dividida em três camadas principais:
 
 ### Tela inicial
 
-<img width="200" alt="telaInicial" src="https://github.com/user-attachments/assets/b5507f92-8835-4d98-950d-dc3ebc09f4ad" />
+<img width="200" alt="Screenshot_1792967570" src="https://github.com/user-attachments/assets/8a54aa76-0f67-42fa-b100-1b21b4b542f4" />
+
 
 
 ### Novo fechamento
 
-<img width="200" alt="fechamento" src="https://github.com/user-attachments/assets/28646215-ac5d-4c94-9ea8-a5c27dce28d0" />
+<img width="200" alt="Screenshot_1792967361" src="https://github.com/user-attachments/assets/e7043d57-dd43-43bf-b914-26858e14c3d5" />
+<img width="200" alt="Screenshot_1792967585" src="https://github.com/user-attachments/assets/9adda210-cce2-4e68-9095-a5bc8ae3dd22" />
+
 
 ### Histórico de fechamentos
 
-<img width="200" alt="historicofechamento" src="https://github.com/user-attachments/assets/48ea9c68-1190-460a-a307-4668426f27e2" />
+<img width="200" alt="Screenshot_1792967805" src="https://github.com/user-attachments/assets/8194cb7a-e360-4442-881f-968d18fce8ac" />
+
 
 
 ### Resumo do fechamento
 
-<img width="200" alt="Screenshot_1792552217" src="https://github.com/user-attachments/assets/5c5b332e-60d6-4c77-b77f-0a9478e77089" />
+<img width="200" alt="Screenshot_1792967602" src="https://github.com/user-attachments/assets/61be42f6-8f2c-4ee0-a3b7-287ec6ef318e" />
+
 
 
 ### Usuários cadastrados
