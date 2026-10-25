@@ -1,7 +1,32 @@
+import 'package:fechamento_caixa/features/home/viewmodel/home_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final formatoDinheiro = NumberFormat.currency(locale: "pt_BR", symbol: "R\$");
+  final HomeViewmodel homeViewmodel = HomeViewmodel();
+  double inicioCaixa = 0;
+
+  Future<void> buscarInicio() async {
+    final valor = await homeViewmodel.buscarInicio();
+
+    setState(() {
+      inicioCaixa = valor;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    buscarInicio();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,353 +44,353 @@ class HomeScreen extends StatelessWidget {
 
       body: SafeArea(
         child: Padding(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              children: [
-                SizedBox(height: 5),
-                //BOX CAIXA ATUAL
-                Container(
-                  width: double.infinity,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 0, 18, 213),
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 10,
-                        offset: Offset(0, 1),
-                      ),
-                    ],
-                  ),
-          
-                  //VALORES INTERNO
-                  padding: EdgeInsets.all(20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Valor em caixa",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-          
-                          Text(
-                            "Aberto",
-                            style: TextStyle(fontSize: 15, color: Colors.white),
-                          ),
-                        ],
-                      ),
-          
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        child: Text(
-                          "RS 1.223,90",
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: [
+              SizedBox(height: 5),
+              //BOX CAIXA ATUAL
+              Container(
+                width: double.infinity,
+                height: 200,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 0, 18, 213),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 10,
+                      offset: Offset(0, 1),
+                    ),
+                  ],
+                ),
+
+                //VALORES INTERNO
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Inicio do caixa",
                           style: TextStyle(
-                            fontSize: 30,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
-                      ),
-          
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 5),
-                        child: Text(
-                          "Dia do Caixa:",
+
+                        Text(
+                          "Aberto",
                           style: TextStyle(fontSize: 15, color: Colors.white),
                         ),
+                      ],
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: Text(
+                        formatoDinheiro.format(inicioCaixa),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
-          
-                      Text(
-                        "Operador: Murilo",
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 5),
+                      child: Text(
+                        "Dia do Caixa: ${DateFormat('dd/MM/yyyy').format(DateTime.now())}",
                         style: TextStyle(fontSize: 15, color: Colors.white),
                       ),
-                    ],
-                  ),
+                    ),
+
+                    Text(
+                      "Operador: Murilo",
+                      style: TextStyle(fontSize: 15, color: Colors.white),
+                    ),
+                  ],
                 ),
-          
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 25),
-                  child: GridView.count(
-                    shrinkWrap: true,
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 15,
-                    mainAxisSpacing: 15,
-                    children: [
-                      Container(
+              ),
+
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 25),
+                child: GridView.count(
+                  shrinkWrap: true,
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 15,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 2,
+                            offset: Offset(0, 1),
+                          ),
+                        ],
+                      ),
+                      child: SizedBox(
                         width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 2,
-                              offset: Offset(0, 1),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/novo_fechamento");
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.black,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(15),
                             ),
-                          ],
-                        ),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/novo_fechamento");
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              foregroundColor: Colors.black,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadiusGeometry.circular(15),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/home_screen/novo_fechamento.png',
+                                width: 50,
+                                height: 50,
                               ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/home_screen/novo_fechamento.png',
-                                  width: 50,
-                                  height: 50,
+
+                              Text(
+                                "Novo",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
                                 ),
-          
-                                Text(
-                                  "Novo",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
+                              ),
+                              Text(
+                                "Fechamento",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
                                 ),
-                                Text(
-                                  "Fechamento",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-          
-                      Container(
+                    ),
+
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 2,
+                            offset: Offset(0, 1),
+                          ),
+                        ],
+                      ),
+                      child: SizedBox(
                         width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 2,
-                              offset: Offset(0, 1),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/historico_caixas");
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.black,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(15),
                             ),
-                          ],
-                        ),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {Navigator.pushNamed(context, "/historico_caixas");},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              foregroundColor: Colors.black,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadiusGeometry.circular(15),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/home_screen/historico_relatorios.png',
+                                width: 50,
+                                height: 50,
                               ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/home_screen/historico_relatorios.png',
-                                  width: 50,
-                                  height: 50,
+
+                              Text(
+                                "Histórico",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
                                 ),
-          
-                                Text(
-                                  "Histórico",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
+                              ),
+
+                              Text(
+                                "de Caixas",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
                                 ),
-          
-                                Text(
-                                  "de Caixas",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-          
-                      Container(
+                    ),
+
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 2,
+                            offset: Offset(0, 1),
+                          ),
+                        ],
+                      ),
+                      child: SizedBox(
                         width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 2,
-                              offset: Offset(0, 1),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/relatorio_caixa");
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.black,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(15),
                             ),
-                          ],
-                        ),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/relatorio_caixa");
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              foregroundColor: Colors.black,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadiusGeometry.circular(15),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/home_screen/relatorios.png',
+                                width: 50,
+                                height: 50,
                               ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/home_screen/relatorios.png',
-                                  width: 50,
-                                  height: 50,
+
+                              Text(
+                                "Relatórios",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
                                 ),
-          
-                                Text(
-                                  "Relatórios",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-          
-                      Container(
+                    ),
+
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 2,
+                            offset: Offset(0, 1),
+                          ),
+                        ],
+                      ),
+                      child: SizedBox(
                         width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 2,
-                              offset: Offset(0, 1),
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.black,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(15),
                             ),
-                          ],
-                        ),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              foregroundColor: Colors.black,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadiusGeometry.circular(15),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/home_screen/usuario.png',
+                                width: 50,
+                                height: 50,
                               ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/home_screen/usuario.png',
-                                  width: 50,
-                                  height: 50,
-                                ),
-          
-                                Text("Usuários"),
-                              ],
-                            ),
+
+                              Text("Usuários"),
+                            ],
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
+        ),
       ),
-      
 
       bottomNavigationBar: SafeArea(
         child: Container(
-            height: 50,
-            color: Colors.white,
-            padding: EdgeInsets.symmetric(horizontal: 40),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/home_screen/botao-de-inicio.png',
-                      width: 20,
-                      height: 20,
-                    ),
-          
-                    Text("Início"),
-                  ],
-                ),
-          
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/home_screen/caixa-registradora.png',
-                      width: 20,
-                      height: 20,
-                    ),
-                    Text("Caixa"),
-                  ],
-                ),
-          
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/home_screen/relatorio.png',
-                      width: 20,
-                      height: 20,
-                    ),
-                    Text("Relatórios"),
-                  ],
-                ),
-          
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/home_screen/mais.png',
-                      width: 20,
-                      height: 20,
-                    ),
-                    Text("Mais"),
-                  ],
-                ),
-              ],
-            ),
+          height: 50,
+          color: Colors.white,
+          padding: EdgeInsets.symmetric(horizontal: 40),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/home_screen/botao-de-inicio.png',
+                    width: 20,
+                    height: 20,
+                  ),
+
+                  Text("Início"),
+                ],
+              ),
+
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/home_screen/caixa-registradora.png',
+                    width: 20,
+                    height: 20,
+                  ),
+                  Text("Caixa"),
+                ],
+              ),
+
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/home_screen/relatorio.png',
+                    width: 20,
+                    height: 20,
+                  ),
+                  Text("Relatórios"),
+                ],
+              ),
+
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/home_screen/mais.png',
+                    width: 20,
+                    height: 20,
+                  ),
+                  Text("Mais"),
+                ],
+              ),
+            ],
           ),
+        ),
       ),
-      
     );
   }
 }

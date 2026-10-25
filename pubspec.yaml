@@ -41,6 +41,11 @@ flutter:
 
       #IMAGENS NOVO FECHAMENTO
     - assets/novo_fechamento/seta-para-esquerda.png
+    - assets/novo_fechamento/notas.png
+    - assets/novo_fechamento/setaBaixo.png
+    - assets/novo_fechamento/restos.png
+    - assets/novo_fechamento/cifrao.png
+
 
 
     #IMAGENS RELATORIO DO CAIXA

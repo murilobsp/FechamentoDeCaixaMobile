@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fechamento_caixa/features/relatorio_de_caixa/viewmodel/relatorio_caixa_viewmodels.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 final formatoDinheiro = NumberFormat.currency(locale: "pt_BR", symbol: "R\$");
+
+final buscarDados = RelatorioCaixaViewmodels();
 
 class RelatorioCaixaScreen extends StatelessWidget {
   const RelatorioCaixaScreen({super.key});
@@ -58,7 +61,9 @@ class RelatorioCaixaScreen extends StatelessWidget {
                             ),
                             SizedBox(width: 10),
                             Text(
-                              DateFormat('dd/MM/yyyy').format((dados["Date"] as Timestamp).toDate().toLocal()),
+                              DateFormat('dd/MM/yyyy').format(
+                                (dados["Date"] as Timestamp).toDate().toLocal(),
+                              ),
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 15,
@@ -78,7 +83,8 @@ class RelatorioCaixaScreen extends StatelessWidget {
                             SizedBox(width: 10),
                             Text(
                               DateFormat('HH:mm:ss').format(
-                                (dados["Date"] as Timestamp).toDate().toLocal()),
+                                (dados["Date"] as Timestamp).toDate().toLocal(),
+                              ),
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 15,
@@ -305,7 +311,7 @@ class RelatorioCaixaScreen extends StatelessWidget {
 
                                 Text(
                                   formatoDinheiro.format(dados["total"]),
-                              style: TextStyle(
+                                  style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 15,
                                   ),
@@ -374,7 +380,7 @@ class RelatorioCaixaScreen extends StatelessWidget {
                               ),
 
                               Text(
-                                "R\$ 3.000,70",
+                                " ${formatoDinheiro.format(dados["entradas"] ?? 0)}",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 15,
@@ -452,11 +458,7 @@ class RelatorioCaixaScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                            dados["obs"] ?? "Sem observações!",
-                            ),
-                          ],
+                          children: [Text(dados["obs"] ?? "Sem observações!")],
                         ),
                       ),
                     ],

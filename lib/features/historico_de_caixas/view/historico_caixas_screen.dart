@@ -8,7 +8,7 @@ bool selectTodos = false;
 bool selectFechados = false;
 bool selectMes = false;
 
-//REFERENCIO O VIEWMODELS PARA USAR A FUNCAO
+//REFERENCIA O VIEWMODELS PARA USAR A FUNCAO
 final HistoricoDeCaixaViewmodels viewmodels = HistoricoDeCaixaViewmodels();
 
 class HistoricoCaixasScreen extends StatefulWidget {
