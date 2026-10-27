@@ -38,11 +38,7 @@ double get iniciocaixa {
   return dinheiro - retirada;
 }
 
-//double get valorSaidas {
-//  final saidas = total - saidas;
-//
-//    return saidas;
-//}
+
 
 class NovoFechamentoScreen extends StatefulWidget {
   const NovoFechamentoScreen({super.key});
@@ -353,7 +349,8 @@ class _NovoFechamentoScreenState extends State<NovoFechamentoScreen> {
                                   ),
 
                                   content: SizedBox(
-                                    width: double.infinity,
+                                    //width: double.infinity,
+                                    width: 280,
 
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
@@ -364,7 +361,7 @@ class _NovoFechamentoScreenState extends State<NovoFechamentoScreen> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Row(
-                                              spacing: 15,
+                                              spacing: 10,
                                               children: [
                                                 Image.asset(
                                                   'assets/novo_fechamento/cifrao.png',
@@ -542,8 +539,8 @@ class _NovoFechamentoScreenState extends State<NovoFechamentoScreen> {
 
                                     ElevatedButton(
                                       onPressed: () async {
-                                        final inicio = await viewModel
-                                            .buscarInicio() ?? 0;
+                                        final inicio =
+                                            await viewModel.buscarInicio() ?? 0;
 
                                         final entradas = total - inicio;
 

@@ -339,53 +339,69 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/home_screen/botao-de-inicio.png',
-                    width: 20,
-                    height: 20,
-                  ),
-
-                  Text("Início"),
-                ],
+              ElevatedButton( onPressed: () {
+                
+              },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/home_screen/botao-de-inicio.png',
+                      width: 20,
+                      height: 20,
+                    ),
+                
+                    Text("Início"),
+                  ],
+                ),
               ),
 
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/home_screen/caixa-registradora.png',
-                    width: 20,
-                    height: 20,
-                  ),
-                  Text("Caixa"),
-                ],
+              ElevatedButton( onPressed: () {
+                
+              },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/home_screen/caixa-registradora.png',
+                      width: 20,
+                      height: 20,
+                    ),
+                    Text("Caixa"),
+                  ],
+                ),
               ),
 
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/home_screen/relatorio.png',
-                    width: 20,
-                    height: 20,
-                  ),
-                  Text("Relatórios"),
-                ],
+              ElevatedButton( onPressed: () {
+                
+              },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/home_screen/relatorio.png',
+                      width: 20,
+                      height: 20,
+                    ),
+                    Text("Relatórios"),
+                  ],
+                ),
               ),
 
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/home_screen/mais.png',
-                    width: 20,
-                    height: 20,
-                  ),
-                  Text("Mais"),
-                ],
+              ElevatedButton( onPressed: () {
+                
+              },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/home_screen/mais.png',
+                      width: 20,
+                      height: 20,
+                    ),
+                    Text("Mais"),
+                  ],
+                ),
               ),
             ],
           ),

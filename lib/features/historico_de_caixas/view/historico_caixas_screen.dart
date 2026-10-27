@@ -7,6 +7,10 @@ import 'package:intl/intl.dart';
 bool selectTodos = false;
 bool selectFechados = false;
 bool selectMes = false;
+bool selectPeriodo = false;
+
+DateTime? dataInicio;
+DateTime? dataFim;
 
 //REFERENCIA O VIEWMODELS PARA USAR A FUNCAO
 final HistoricoDeCaixaViewmodels viewmodels = HistoricoDeCaixaViewmodels();
@@ -19,6 +23,46 @@ class HistoricoCaixasScreen extends StatefulWidget {
 }
 
 class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
+  
+  Future<List<Map<String, dynamic>>>? resultadoPeriodo;
+
+
+  Future<List<Map<String, dynamic>>> buscarNaVM() {
+    if (selectTodos == true) {
+      return viewmodels.buscarFechamentos();
+    } else if (selectFechados == true) {
+      return viewmodels.buscarFechados();
+    } else if (selectMes == true) {
+      return viewmodels.buscaporMes(DateTime.now());
+    } else if (selectPeriodo == true) {
+      return resultadoPeriodo!;
+    }
+
+    return Future.value([]);
+  }
+
+
+  Future<void> selecData() async {
+    final data = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(2020),
+      lastDate: DateTime.now(),
+    );
+
+    if (data == null) return;
+
+    if (!mounted) return;
+
+    setState(() {
+      selectPeriodo = true;
+      selectTodos = false;
+      selectFechados = false;
+      selectMes = false;
+
+      resultadoPeriodo = viewmodels.buscaPeriodo(data.start, data.end);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +84,7 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: selecData,
                   style: ElevatedButton.styleFrom(
                     alignment: Alignment.centerLeft,
                     shape: RoundedRectangleBorder(
@@ -69,6 +113,7 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
                           selectTodos = !selectTodos;
                           selectFechados = false;
                           selectMes = false;
+                          selectPeriodo = false;
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -90,6 +135,7 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
                           selectFechados = !selectFechados;
                           selectTodos = false;
                           selectMes = false;
+                          selectPeriodo = false;
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -111,6 +157,7 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
                           selectMes = !selectMes;
                           selectTodos = false;
                           selectFechados = false;
+                          selectPeriodo = false;
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -129,10 +176,13 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
 
               SizedBox(height: 10),
 
-              if (selectTodos == true)
+              
+
+
+                //FAZ TODAS AS BUSCAS
                 Expanded(
                   child: FutureBuilder<List<Map<String, dynamic>>>(
-                    future: viewmodels.buscarFechamentos(),
+                    future: buscarNaVM(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData || snapshot.data!.isEmpty) {
                         return const Text("Nenhum dado encontrado!");
@@ -257,6 +307,8 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
                     },
                   ),
                 ),
+
+            
             ],
           ),
         ),

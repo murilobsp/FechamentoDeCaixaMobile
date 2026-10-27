@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fechamento_caixa/features/novo_fechamento/model/novo_fechamento_model.dart';
 
@@ -28,8 +27,6 @@ class NovoFechamentoViewmodel {
     return resultado.docs.first.id;
   }
 
-
-
   Future<double?> buscarInicio() async {
     final resultado = await FirebaseFirestore.instance
         .collection("fechamentos")
@@ -43,8 +40,6 @@ class NovoFechamentoViewmodel {
 
     return (resul["inicioCaixa"] as num).toDouble();
   }
-
-
 
   Future<void> finalizarFechamento(
     NovoFechamentoModel fechamento,
@@ -67,4 +62,10 @@ class NovoFechamentoViewmodel {
           "saidas": fechamento.saidas ?? 0,
         });
   }
+
+  
+
+
+
+  
 }
