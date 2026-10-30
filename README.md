@@ -56,6 +56,7 @@ A arquitetura é dividida em três camadas principais:
 
 <img width="200" alt="Screenshot_1792967570" src="https://github.com/user-attachments/assets/8a54aa76-0f67-42fa-b100-1b21b4b542f4" />
 
+<img width="200" alt="Screenshot_1793380221" src="https://github.com/user-attachments/assets/116142a2-ea44-47ed-8dd9-51e28ec7d482" />
 
 
 ### Novo fechamento
