@@ -2,6 +2,11 @@ import 'package:fechamento_caixa/features/home/viewmodel/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+bool selectInicio = false;
+bool selectCaixa = false;
+bool selectRelatorios = false;
+bool selectMais = false;
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -40,7 +45,355 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: const Color.fromARGB(255, 0, 18, 213),
         iconTheme: IconThemeData(color: Colors.white),
       ),
-      drawer: Drawer(backgroundColor: Colors.white),
+      drawer: Drawer(
+        backgroundColor: Colors.white,
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              height: 300,
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 0, 18, 213),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: 70),
+
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 3),
+                    ),
+                    child: InkWell(
+                      onTap: () {},
+
+                      customBorder: const CircleBorder(),
+                      child: CircleAvatar(
+                        radius: 70,
+                        backgroundColor: Colors.white,
+                        backgroundImage: AssetImage(
+                          'assets/drawer/fotoPerfil.png',
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 15),
+
+                  Text(
+                    "Murilo Bispo",
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsetsGeometry.symmetric(horizontal: 20),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 60,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusGeometry.circular(10),
+                      ),
+                    ),
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          spacing: 25,
+                          children: [
+                            Image.asset('assets/drawer/user.png', width: 25),
+                            Text(
+                              "Meu Perfil",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                color: const Color.fromARGB(200, 0, 0, 0),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Icon(Icons.arrow_forward_ios_rounded),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 10),
+
+            SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsetsGeometry.symmetric(horizontal: 20),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 60,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusGeometry.circular(10),
+                      ),
+                    ),
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          spacing: 25,
+                          children: [
+                            Image.asset(
+                              'assets/drawer/aparencia.png',
+                              width: 25,
+                            ),
+                            Text(
+                              "Aparência",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                color: const Color.fromARGB(200, 0, 0, 0),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Icon(Icons.arrow_forward_ios_rounded),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 10),
+
+            SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsetsGeometry.symmetric(horizontal: 20),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 60,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusGeometry.circular(10),
+                      ),
+                    ),
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          spacing: 25,
+                          children: [
+                            Image.asset('assets/drawer/config.png', width: 27),
+                            Text(
+                              "Configurações",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                color: const Color.fromARGB(200, 0, 0, 0),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Icon(Icons.arrow_forward_ios_rounded),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 10),
+
+            SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsetsGeometry.symmetric(horizontal: 20),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 60,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusGeometry.circular(10),
+                      ),
+                    ),
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          spacing: 25,
+                          children: [
+                            Image.asset('assets/drawer/ajuda.png', width: 23),
+                            Text(
+                              "Ajuda e Suporte",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                color: const Color.fromARGB(200, 0, 0, 0),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Icon(Icons.arrow_forward_ios_rounded),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 10),
+
+            SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsetsGeometry.symmetric(horizontal: 18),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 60,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusGeometry.circular(10),
+                      ),
+                    ),
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          spacing: 18,
+                          children: [
+                            Image.asset('assets/drawer/info.png', width: 32),
+                            Text(
+                              "Sobre o aplicativo",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                color: const Color.fromARGB(200, 0, 0, 0),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Icon(Icons.arrow_forward_ios_rounded),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            Divider(
+              color: const Color.fromARGB(41, 158, 158, 158),
+              thickness: 2,
+              height: 40,
+              indent: 28,
+              endIndent: 28,
+              
+            ),
+
+            SizedBox(height: 13,),
+
+            SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsetsGeometry.symmetric(horizontal: 20),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 60,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(25, 255, 0, 0),
+
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusGeometry.circular(10),
+                      ),
+                    ),
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          spacing: 18,
+                          children: [
+                            Image.asset('assets/drawer/sair.png', width: 32),
+                            Text(
+                              "Sair da Conta",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                color: const Color.fromARGB(199, 255, 0, 0),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Icon(Icons.arrow_forward_ios_rounded, color: const Color.fromARGB(255, 255, 0, 0),),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 50,),
+
+            SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsetsGeometry.symmetric(horizontal: 20),
+                child: Text("Versão 1.0.0"),
+              ),
+            ),
+
+
+          ],
+        ),
+      ),
 
       body: SafeArea(
         child: Padding(
@@ -83,7 +436,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
                         Text(
                           "Aberto",
-                          style: TextStyle(fontSize: 15, color: Colors.white),
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: const Color.fromARGB(255, 8, 233, 1),
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ],
                     ),
@@ -339,67 +696,158 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
             children: [
-              ElevatedButton( onPressed: () {
-                
-              },
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: selectInicio
+                      ? Colors.white
+                      : const Color.fromARGB(255, 0, 18, 213),
+                  foregroundColor: selectInicio ? Colors.white : Colors.black,
+                  fixedSize: Size(70, 50),
+                  elevation: 0,
+
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'assets/home_screen/botao-de-inicio.png',
-                      width: 20,
-                      height: 20,
+                      selectInicio
+                          ? 'assets/home_screen/botao-de-inicio.png'
+                          : 'assets/home_screen/botao-de-inicio-white.png',
+
+                      width: 50,
+                      height: 50,
                     ),
-                
-                    Text("Início"),
                   ],
                 ),
               ),
 
-              ElevatedButton( onPressed: () {
-                
-              },
+              ElevatedButton(
+                onPressed: () async {
+                  await Navigator.pushNamed(context, "/novo_fechamento");
+                  setState(() {
+                    selectInicio = false;
+                    selectCaixa = !selectCaixa;
+                    selectRelatorios = false;
+                    selectMais = false;
+                  });
+
+                  setState(() {
+                    selectInicio = false;
+                    selectCaixa = false;
+                    selectRelatorios = false;
+                    selectMais = false;
+                  });
+                },
+
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: selectCaixa
+                      ? const Color.fromARGB(255, 0, 18, 213)
+                      : Colors.white,
+                  foregroundColor: selectCaixa ? Colors.white : Colors.black,
+                  fixedSize: Size(70, 50),
+                  elevation: 0,
+
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                ),
+
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'assets/home_screen/caixa-registradora.png',
-                      width: 20,
-                      height: 20,
+                      selectCaixa
+                          ? 'assets/home_screen/caixa-registradora-white.png'
+                          : 'assets/home_screen/caixa-registradora.png',
+                      width: 50,
+                      height: 50,
                     ),
-                    Text("Caixa"),
                   ],
                 ),
               ),
 
-              ElevatedButton( onPressed: () {
-                
-              },
+              ElevatedButton(
+                onPressed: () async {
+                  await Navigator.pushNamed(context, "/historico_caixas");
+                  setState(() {
+                    selectInicio = false;
+                    selectCaixa = false;
+                    selectRelatorios = !selectRelatorios;
+                    selectMais = false;
+                  });
+
+                  setState(() {
+                    selectInicio = false;
+                    selectCaixa = false;
+                    selectRelatorios = false;
+                    selectMais = false;
+                  });
+                },
+
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: selectRelatorios
+                      ? const Color.fromARGB(255, 0, 18, 213)
+                      : Colors.white,
+                  foregroundColor: selectRelatorios
+                      ? Colors.white
+                      : Colors.black,
+                  fixedSize: Size(70, 50),
+                  elevation: 0,
+
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'assets/home_screen/relatorio.png',
-                      width: 20,
-                      height: 20,
+                      selectRelatorios
+                          ? 'assets/home_screen/relatorio-white.png'
+                          : 'assets/home_screen/relatorio.png',
+                      width: 50,
+                      height: 50,
                     ),
-                    Text("Relatórios"),
                   ],
                 ),
               ),
 
-              ElevatedButton( onPressed: () {
-                
-              },
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    selectInicio = false;
+                    selectCaixa = false;
+                    selectRelatorios = false;
+                    selectMais = !selectMais;
+                  });
+                },
+
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: selectMais
+                      ? const Color.fromARGB(255, 0, 18, 213)
+                      : Colors.white,
+                  foregroundColor: selectMais ? Colors.white : Colors.black,
+                  fixedSize: Size(70, 50),
+                  elevation: 0,
+
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'assets/home_screen/mais.png',
-                      width: 20,
-                      height: 20,
+                      selectMais
+                          ? 'assets/home_screen/mais-white.png'
+                          : 'assets/home_screen/mais.png',
+                      width: 50,
+                      height: 50,
                     ),
-                    Text("Mais"),
                   ],
                 ),
               ),

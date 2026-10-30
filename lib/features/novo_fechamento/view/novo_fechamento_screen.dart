@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:fechamento_caixa/features/novo_fechamento/viewmodel/novo_fechamento_viewmodel.dart';
 
+bool selectInicio = false;
+bool selectCaixa = false;
+bool selectRelatorios = false;
+bool selectMais = false;
+
 //CONTROLLER PARA PEGAR VALOR DAS TEXTFIELD
 
 final dinheiroController = TextEditingController();
@@ -626,6 +631,184 @@ class _NovoFechamentoScreenState extends State<NovoFechamentoScreen> {
                       child: Text("Finalizar Fechamento"),
                     ),
                   ),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        
+      ),
+
+
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          height: 50,
+          color: Colors.white,
+          padding: EdgeInsets.symmetric(horizontal: 40),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+            children: [
+              ElevatedButton(
+                onPressed: () async {
+                 
+                  await Navigator.pushNamed(context, "/");
+                  setState(() {
+                    selectInicio = !selectInicio;
+                    selectCaixa = false;
+                    selectRelatorios = false;
+                    selectMais = false;
+                  });
+
+                  setState(() {
+                    selectInicio = false;
+                    selectCaixa = false;
+                    selectRelatorios = false;
+                    selectMais = false;
+                    
+                  });
+
+              
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: selectInicio
+                      ? const Color.fromARGB(255, 0, 18, 213)
+                      : Colors.white,
+                  foregroundColor: selectInicio ? Colors.white : Colors.black,
+                  fixedSize: Size(70, 50),
+                  elevation: 0,
+
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      selectInicio
+                          ? 'assets/home_screen/botao-de-inicio-white.png'
+                          : 'assets/home_screen/botao-de-inicio.png',
+
+                      width: 50,
+                      height: 50,
+                    ),
+                  ],
+                ),
+              ),
+
+              ElevatedButton(
+                onPressed: () {},
+                  
+
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: selectCaixa
+                      ? Colors.white
+                      : const Color.fromARGB(255, 0, 18, 213),
+                  foregroundColor: selectCaixa ? Colors.white : Colors.black,
+                  fixedSize: Size(70, 50),
+                  elevation: 0,
+
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                ),
+
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      selectCaixa
+                          ? 'assets/home_screen/caixa-registradora.png'
+                          : 'assets/home_screen/caixa-registradora-white.png',
+                      width: 50,
+                      height: 50,
+                    ),
+                  ],
+                ),
+              ),
+
+              ElevatedButton(
+                onPressed: () async {
+                  await Navigator.pushNamed(context, "/historico_caixas");
+                  setState(() {
+                    selectInicio = false;
+                    selectCaixa = false;
+                    selectRelatorios = !selectRelatorios;
+                    selectMais = false;
+                  });
+
+                  setState(() {
+                    selectInicio = false;
+                    selectCaixa = false;
+                    selectRelatorios = false;
+                    selectMais = false;
+                    
+                  });
+                },
+
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: selectRelatorios
+                      ? const Color.fromARGB(255, 0, 18, 213)
+                      : Colors.white,
+                  foregroundColor: selectRelatorios
+                      ? Colors.white
+                      : Colors.black,
+                  fixedSize: Size(70, 50),
+                  elevation: 0,
+
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      selectRelatorios
+                          ? 'assets/home_screen/relatorio-white.png'
+                          : 'assets/home_screen/relatorio.png',
+                      width: 50,
+                      height: 50,
+                    ),
+                  ],
+                ),
+              ),
+
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    selectInicio = false;
+                    selectCaixa = false;
+                    selectRelatorios = false;
+                    selectMais = !selectMais;
+                  });
+                },
+
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: selectMais
+                      ? const Color.fromARGB(255, 0, 18, 213)
+                      : Colors.white,
+                  foregroundColor: selectMais ? Colors.white : Colors.black,
+                  fixedSize: Size(70, 50),
+                  elevation: 0,
+
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      selectMais
+                          ? 'assets/home_screen/mais-white.png'
+                          : 'assets/home_screen/mais.png',
+                      width: 50,
+                      height: 50,
+                    ),
+                  ],
                 ),
               ),
             ],

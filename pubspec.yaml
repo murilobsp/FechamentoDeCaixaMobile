@@ -29,14 +29,13 @@ dev_dependencies:
 flutter:
   assets:
       #IMAGENS HOME SCREEN
-    - assets/home_screen/novo_fechamento.png
-    - assets/home_screen/historico_relatorios.png
-    - assets/home_screen/relatorios.png
-    - assets/home_screen/usuario.png
-    - assets/home_screen/caixa-registradora.png
-    - assets/home_screen/botao-de-inicio.png
-    - assets/home_screen/relatorio.png
-    - assets/home_screen/mais.png
+    - assets/home_screen/
+
+
+      #IMAGENS DRAWER
+    - assets/drawer/
+
+
     
 
       #IMAGENS NOVO FECHAMENTO
