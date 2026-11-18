@@ -18,6 +18,9 @@ dependencies:
   intl: ^0.20.3
   firebase_core: ^4.15.0
   cloud_firestore: ^6.10.0
+  pdf: ^3.13.1
+  printing: ^5.15.1
+  flutter_file_saver: ^0.10.0
 
 dev_dependencies:
   flutter_test:
@@ -28,15 +31,24 @@ dev_dependencies:
 
 flutter:
   assets:
+      #IMAGENS WELCOME
+    - assets/welcome/
+
+      #IMAGENS LOGIN
+    - assets/login/
+
+
       #IMAGENS HOME SCREEN
     - assets/home_screen/
+
+      #IMAGENS CADASTRO
+    - assets/cadastro/
 
 
       #IMAGENS DRAWER
     - assets/drawer/
 
-
-    
+  
 
       #IMAGENS NOVO FECHAMENTO
     - assets/novo_fechamento/seta-para-esquerda.png
@@ -54,6 +66,10 @@ flutter:
     - assets/relatorio_caixa/cartaodebito.png
     - assets/relatorio_caixa/entrada.png
     - assets/relatorio_caixa/saida.png
+
+
+    #IMAGENS EXPORTAR
+    - assets/exportar/
 
 
 

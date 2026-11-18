@@ -1,3 +1,4 @@
+import 'package:fechamento_caixa/features/bottom/bottom_navigator.dart';
 import 'package:fechamento_caixa/features/home/viewmodel/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -5,7 +6,7 @@ import 'package:intl/intl.dart';
 bool selectInicio = false;
 bool selectCaixa = false;
 bool selectRelatorios = false;
-bool selectMais = false;
+bool selectPdf = false;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -289,7 +290,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: double.infinity,
                   height: 60,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/sobreoapp");
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
 
@@ -331,10 +334,9 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 40,
               indent: 28,
               endIndent: 28,
-              
             ),
 
-            SizedBox(height: 13,),
+            SizedBox(height: 13),
 
             SizedBox(
               width: double.infinity,
@@ -372,7 +374,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
 
-                        Icon(Icons.arrow_forward_ios_rounded, color: const Color.fromARGB(255, 255, 0, 0),),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: const Color.fromARGB(255, 255, 0, 0),
+                        ),
                       ],
                     ),
                   ),
@@ -380,7 +385,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            SizedBox(height: 50,),
+            SizedBox(height: 50),
 
             SizedBox(
               width: double.infinity,
@@ -389,8 +394,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text("Versão 1.0.0"),
               ),
             ),
-
-
           ],
         ),
       ),
@@ -609,7 +612,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, "/relatorio_caixa");
+                            Navigator.pushNamed(context, "/exportar");
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
@@ -628,7 +631,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
 
                               Text(
-                                "Relatórios",
+                                "Exportar PDF",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
@@ -673,7 +676,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 50,
                               ),
 
-                              Text("Usuários"),
+                              Text(
+                                "Usuários",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -687,7 +696,17 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
 
-      bottomNavigationBar: SafeArea(
+      bottomNavigationBar: SafeArea(child: BottomNavigator()),
+      
+
+
+
+
+
+
+
+
+     /* bottomNavigationBar: SafeArea(
         child: Container(
           height: 50,
           color: Colors.white,
@@ -732,14 +751,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     selectInicio = false;
                     selectCaixa = !selectCaixa;
                     selectRelatorios = false;
-                    selectMais = false;
+                    selectPdf = false;
                   });
 
                   setState(() {
                     selectInicio = false;
                     selectCaixa = false;
                     selectRelatorios = false;
-                    selectMais = false;
+                    selectPdf = false;
                   });
                 },
 
@@ -777,14 +796,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     selectInicio = false;
                     selectCaixa = false;
                     selectRelatorios = !selectRelatorios;
-                    selectMais = false;
+                    selectPdf = false;
                   });
 
                   setState(() {
                     selectInicio = false;
                     selectCaixa = false;
                     selectRelatorios = false;
-                    selectMais = false;
+                    selectPdf = false;
                   });
                 },
 
@@ -817,20 +836,28 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  await Navigator.pushNamed(context, "/exportar");
                   setState(() {
                     selectInicio = false;
                     selectCaixa = false;
                     selectRelatorios = false;
-                    selectMais = !selectMais;
+                    selectPdf = !selectPdf;
+                  });
+
+                  setState(() {
+                    selectInicio = false;
+                    selectCaixa = false;
+                    selectRelatorios = false;
+                    selectPdf = false;
                   });
                 },
 
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: selectMais
+                  backgroundColor: selectPdf
                       ? const Color.fromARGB(255, 0, 18, 213)
                       : Colors.white,
-                  foregroundColor: selectMais ? Colors.white : Colors.black,
+                  foregroundColor: selectPdf ? Colors.white : Colors.black,
                   fixedSize: Size(70, 50),
                   elevation: 0,
 
@@ -842,9 +869,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      selectMais
-                          ? 'assets/home_screen/mais-white.png'
-                          : 'assets/home_screen/mais.png',
+                      selectPdf
+                          ? 'assets/home_screen/pdf-white.png'
+                          : 'assets/home_screen/pdf.png',
                       width: 50,
                       height: 50,
                     ),
@@ -854,7 +881,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-      ),
+      ), */ 
     );
   }
 }

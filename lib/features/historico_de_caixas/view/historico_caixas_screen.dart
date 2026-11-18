@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fechamento_caixa/features/bottom/bottom_navigator.dart';
 import 'package:fechamento_caixa/features/historico_de_caixas/viewmodel/historico_de_caixa_viewmodels.dart';
 import 'package:flutter/material.dart';
 import 'package:fechamento_caixa/features/novo_fechamento/view/novo_fechamento_screen.dart';
@@ -8,6 +9,7 @@ bool selectTodos = false;
 bool selectFechados = false;
 bool selectMes = false;
 bool selectPeriodo = false;
+bool selectPdf = false;
 
 DateTime? dataInicio;
 DateTime? dataFim;
@@ -316,7 +318,11 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
 
       ),
 
-      bottomNavigationBar: SafeArea(
+
+
+      bottomNavigationBar: SafeArea(child: BottomNavigator()),
+
+      /* bottomNavigationBar: SafeArea(
         child: Container(
           height: 50,
           color: Colors.white,
@@ -332,14 +338,14 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
                     selectInicio = !selectInicio;
                     selectCaixa = false;
                     selectRelatorios = false;
-                    selectMais = false;
+                    selectPdf = false;
                   });
 
                   setState(() {
                     selectInicio = false;
                     selectCaixa = false;
                     selectRelatorios = false;
-                    selectMais = false;
+                    selectPdf = false;
                     
                   });
                 },
@@ -377,14 +383,14 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
                     selectInicio = false;
                     selectCaixa = !selectCaixa;
                     selectRelatorios = false;
-                    selectMais = false;
+                    selectPdf = false;
                   });
 
                   setState(() {
                     selectInicio = false;
                     selectCaixa = false;
                     selectRelatorios = false;
-                    selectMais = false;
+                    selectPdf = false;
                     
                   });
                 },
@@ -450,20 +456,28 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
               ),
 
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async{
+                  await Navigator.pushNamed(context, "/exportar");
                   setState(() {
                     selectInicio = false;
                     selectCaixa = false;
                     selectRelatorios = false;
-                    selectMais = !selectMais;
+                    selectPdf = !selectPdf;
+                  });
+
+                  setState(() {
+                    selectInicio = false;
+                    selectCaixa = false;
+                    selectRelatorios = false;
+                    selectPdf = false;
                   });
                 },
 
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: selectMais
+                  backgroundColor: selectPdf
                       ? const Color.fromARGB(255, 0, 18, 213)
                       : Colors.white,
-                  foregroundColor: selectMais ? Colors.white : Colors.black,
+                  foregroundColor: selectPdf ? Colors.white : Colors.black,
                   fixedSize: Size(70, 50),
                   elevation: 0,
 
@@ -475,9 +489,9 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      selectMais
-                          ? 'assets/home_screen/mais-white.png'
-                          : 'assets/home_screen/mais.png',
+                      selectPdf
+                          ? 'assets/home_screen/pdf-white.png'
+                          : 'assets/home_screen/pdf.png',
                       width: 50,
                       height: 50,
                     ),
@@ -487,7 +501,7 @@ class _HistoricoCaixasScreenState extends State<HistoricoCaixasScreen> {
             ],
           ),
         ),
-      ),
+      ), */
       
     );
   }
