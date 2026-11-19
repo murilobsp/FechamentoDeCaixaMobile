@@ -21,6 +21,7 @@ dependencies:
   pdf: ^3.13.1
   printing: ^5.15.1
   flutter_file_saver: ^0.10.0
+  firebase_auth: ^6.7.1
 
 dev_dependencies:
   flutter_test:

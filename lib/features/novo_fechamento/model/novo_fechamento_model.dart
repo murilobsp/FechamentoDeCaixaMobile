@@ -8,6 +8,7 @@ class NovoFechamentoModel {
   final double saldoFinal;
   final double? entradas;
   final double? saidas;
+  
 
   NovoFechamentoModel({
     required this.dinheiro,

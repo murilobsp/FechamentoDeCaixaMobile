@@ -1,8 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fechamento_caixa/features/novo_fechamento/model/novo_fechamento_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+
 
 class NovoFechamentoViewmodel {
+  
+
   Future<void> salvarFechamento(NovoFechamentoModel fechamento) async {
+
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null){
+      throw Exception("Usuário não encontrado");
+    }
+  
     await FirebaseFirestore.instance.collection("fechamentos").add({
       "dinheiro": 0,
       "credito": 0,
@@ -12,6 +24,7 @@ class NovoFechamentoViewmodel {
       "obs": "",
       "inicioCaixa": fechamento.saldoFinal,
       "status": "Aberto",
+      "user" : user.uid,
     });
   }
 
@@ -62,10 +75,4 @@ class NovoFechamentoViewmodel {
           "saidas": fechamento.saidas ?? 0,
         });
   }
-
-  
-
-
-
-  
 }

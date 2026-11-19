@@ -1,5 +1,6 @@
 import 'package:fechamento_caixa/features/bottom/bottom_navigator.dart';
 import 'package:fechamento_caixa/features/home/viewmodel/home_viewmodel.dart';
+import 'package:fechamento_caixa/features/login/viewmodel/login_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -18,6 +19,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final formatoDinheiro = NumberFormat.currency(locale: "pt_BR", symbol: "R\$");
   final HomeViewmodel homeViewmodel = HomeViewmodel();
+  final LoginViewmodel loginViewmodel = LoginViewmodel();
+
   double inicioCaixa = 0;
 
   Future<void> buscarInicio() async {
@@ -81,13 +84,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   SizedBox(height: 15),
 
-                  Text(
-                    "Murilo Bispo",
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
+                  FutureBuilder<Map<String, dynamic>>(
+                    future: homeViewmodel.buscarUser(),
+                    builder: (context, snaphot) {
+                      if (!snaphot.hasData) {
+                        return CircularProgressIndicator();
+                      }
+                      return Text(
+                        snaphot.data!["nome"],
+                        style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -346,7 +357,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: double.infinity,
                   height: 60,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await LoginViewmodel().deslogar();
+
+                      if (!context.mounted) return;
+
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        "/",
+                        (route) => false,
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(25, 255, 0, 0),
 
@@ -468,10 +489,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
 
-                    Text(
-                      "Operador: Murilo",
-                      style: TextStyle(fontSize: 15, color: Colors.white),
-                    ),
+                    FutureBuilder<Map<String, dynamic>>(
+                    future: homeViewmodel.buscarUser(),
+                    builder: (context, snaphot) {
+                      if (!snaphot.hasData) {
+                        return CircularProgressIndicator();
+                      }
+                      return Text(
+                        "Operador: ${snaphot.data!["nome"]}",
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                        ),
+                      );
+                    },
+                  ),
                   ],
                 ),
               ),
@@ -697,16 +729,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 
       bottomNavigationBar: SafeArea(child: BottomNavigator()),
-      
 
-
-
-
-
-
-
-
-     /* bottomNavigationBar: SafeArea(
+      /* bottomNavigationBar: SafeArea(
         child: Container(
           height: 50,
           color: Colors.white,
@@ -881,7 +905,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-      ), */ 
+      ), */
     );
   }
 }
